@@ -1,0 +1,42 @@
+<div class="comment">
+	<a class="avatar">
+		<img src="{{comment.authorAvatar}}">
+	</a>
+
+	<div class="content">
+		<a class="author">{{comment.author}}</a>
+
+		<div class="metadata">
+			<div class="date">{{comment.createTime | date:'medium'}}</div>
+			<a *ngIf="comment.author === username" (click)="textEditor.isEditing = true" class="post-button pointer-cursor"><i class="write icon"></i>edit</a>
+		</div>
+
+		<div *ngIf="textEditor.isEditing" class="text post-comment-edit">
+			<div class="ui fluid action mini input">
+				<input type="text" [(ngModel)]="textEditor.value">
+				<div class="ui icon buttons">
+					<button (click)="textEditor.isEditing = false" class="ui button">
+						<i class="remove icon"></i>
+					</button>
+					<button [ngClass]="{ 'disabled': textEditor.isHandling || !textEditor.value, 'loading': textEditor.isHandling }" (click)="edit()" class="ui button">
+						<i class="checkmark icon"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div *ngIf="!textEditor.isEditing" class="text">
+			{{comment.text}}
+		</div>
+
+		<div *ngIf="commentError.isShowing" class="text">
+			<div  class="ui warning message">
+				<i (click)="commentError.isShowing = false" class="close icon"></i>
+				<div class="header">
+					Error
+				</div>
+				<p>{{commentError.message}}</p>
+			</div>
+		</div>
+	</div>
+</div>

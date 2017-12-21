@@ -1,0 +1,71 @@
+<div class="ui segment">
+	<div class="ui grid">
+		<div *ngIf="articleError.isShowing" class="sixteen wide column message-row">
+			<div  class="ui warning message">
+				<i (click)="articleError.isShowing = false" class="close icon"></i>
+				<div class="header">
+					Error
+				</div>
+				<p>{{articleError.message}}</p>
+			</div>
+		</div>
+
+		<div class="two wide column">
+			<img src="{{article.authorAvatar}}" class="post-avatar" alt="avatar-my">
+		</div>
+
+		<div class="fourteen wide column">
+			<div class="post-info">
+				<span class="post-author">{{article.author}}</span>
+				<span class="post-time">{{article.createTime | date:'medium'}}</span>
+			</div>
+
+			<div *ngIf="textEditor.isEditing" class="post-text">
+				<div class="ui form">
+					<div class="field">
+						<textarea class="post-editor" [(ngModel)]="textEditor.value" rows="2"></textarea>
+					</div>
+				</div>
+
+				<div class="ui icon buttons post-edit-button pull-right">
+					<button (click)="textEditor.isEditing = false" class="ui button">
+						<i class="remove icon"></i>
+					</button>
+					<button [ngClass]="{ 'disabled': textEditor.isHandling || !textEditor.value, 'loading': textEditor.isHandling }" (click)="edit()" class="ui button">
+						<i class="checkmark icon"></i>
+					</button>
+				</div>
+			</div>
+
+			<div *ngIf="!textEditor.isEditing" class="post-text">
+				{{article.text}}
+			</div>
+
+			<div *ngIf="!!article.image" class="post-picture">
+				<a target="_blank" href="{{article.image}}"><img src="{{article.image}}" alt="pic"></a>
+			</div>
+
+			<div class="post-buttons">
+				<a *ngIf="article.author === username" (click)="textEditor.isEditing = true" class="post-button pointer-cursor"><i class="write icon"></i>edit</a>
+				<a (click)="isShowingComments = !isShowingComments" class="post-button pointer-cursor"><i class="comment icon"></i>{{article.comments.length}} comment(s)</a>
+			</div>
+		</div>
+
+		<div *ngIf="isShowingComments" class="sixteen wide column post-comments">
+			<div class="ui fluid action input">
+				<input type="text" placeholder="say something..." [(ngModel)]="newCommentEditor.value">
+				<button (click)="postComment()" [ngClass]="{ 'loading': newCommentEditor.isHandling, 'disabled': !newCommentEditor.value || newCommentEditor.isHandling }" class="ui teal right labeled icon button">
+					<i class="icon edit"></i> Add
+				</button>
+			</div>
+
+			<span *ngIf="article.comments.length === 0" class="message-no-content">
+			no comment yet...
+		</span>
+
+			<div *ngIf="!!article.comments.length" class="ui comments">
+				<app-comment-detail *ngFor="let comment of article.comments" [comment]="comment" [articleId]="article._id"></app-comment-detail>
+			</div>
+		</div>
+	</div>
+</div>

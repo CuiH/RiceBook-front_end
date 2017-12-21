@@ -1,0 +1,30 @@
+.pull-right {
+	float: right;
+}
+
+.pull-left {
+	float: left;
+}
+
+.pointer-cursor {
+	cursor: pointer;
+}
+
+.full-input {
+	width: 100%;
+}
+
+.asterisk {
+	color: red;
+}
+
+.message-row {
+	padding-bottom: 0!important;
+}
+
+
+@media only screen and (max-width: 767px) {
+	html {
+		font-size: 115%;
+	}
+}

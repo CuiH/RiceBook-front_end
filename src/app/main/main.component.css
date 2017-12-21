@@ -1,0 +1,67 @@
+.ui.container {
+	padding-top: 30px;
+}
+
+.ui.grid {
+	margin-bottom: 0;
+}
+
+.headline-button {
+	padding: 0.27rem!important;
+}
+
+.headline-edit-button {
+	margin-top: 4px;
+}
+
+.header-username {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.following-row {
+	padding-top: 0!important;
+	padding-bottom: 0!important;
+}
+
+.right-column {
+	padding-left: 0!important;
+}
+
+
+@media only screen and (max-width: 767px) {
+	.profile-header {
+		background-image: url("http://cuih.xyz/assets/images/temp/profile.jpg");
+		padding-top: 1.5rem;
+		padding-bottom: 1.5rem;
+		text-align: center;
+	}
+
+	.mobile-headline {
+		width: 85%;
+	}
+
+	.header-avatar {
+		display: block;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	.header-avatar img {
+		display: block;
+		margin: 0 auto;
+		width: 130px;
+		height: 130px;
+		border-radius: 5px;
+	}
+
+	.profile-header span {
+		display: block;
+	}
+
+	.header-display-name {
+		font-weight: bold;
+		font-size: 1.4rem;
+		margin-bottom: 20px;
+	}
+}

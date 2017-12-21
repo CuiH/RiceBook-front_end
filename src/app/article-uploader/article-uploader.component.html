@@ -1,0 +1,44 @@
+<div class="sixteen wide column">
+	<div class="ui segment">
+		<div class="ui inverted dimmer" [ngClass]="{ 'active': newArticleEditor.isHandling }">
+			<div class="ui text loader">Posting {{uploadProgress}}%</div>
+		</div>
+
+		<div class="ui form">
+			<div class="field">
+				<label>Something to share?</label>
+				<textarea id="pa_content" placeholder="What's happening?" [(ngModel)]="newArticleEditor.value" rows="4"></textarea>
+			</div>
+		</div>
+
+		<div class="new-post-buttons">
+			<div *ngIf="!imageEditor.isEditing" class="new-post-upload">
+				<a><i class="icon image"></i>Upload an Image</a>
+				<input ng2FileSelect class="pointer-cursor" type="file" accept="image/*" [uploader]="uploader" (change)="showImageInfo()">
+			</div>
+
+			<div *ngIf="imageEditor.isEditing" class="new-post-upload">
+				<span>{{imageEditor.value}}<i (click)="clearImage()" class="pointer-cursor icon cancel"></i></span>
+			</div>
+
+			<div *ngIf="!newArticleEditor.value" class="pull-right">
+				<div class="ui submit teal button disabled">Post</div>
+			</div>
+
+			<div *ngIf="newArticleEditor.value" class="pull-right">
+				<div class="ui submit red button" (click)="newArticleEditor.value = ''">Clear</div>
+				<div id="pa_btn" class="ui submit teal button" (click)="checkPost()">Post</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="newArticleError.isShowing" class="sixteen wide column message-row">
+	<div  class="ui warning message">
+		<i (click)="newArticleError.isShowing = false" class="close icon"></i>
+		<div class="header">
+			Error
+		</div>
+		<p>{{newArticleError.message}}</p>
+	</div>
+</div>

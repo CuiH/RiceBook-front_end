@@ -1,0 +1,64 @@
+.post-avatar {
+	display: block;
+	border-radius: 5px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.post-info {
+	display: block;
+}
+
+.post-author {
+	font-weight: bold;
+	font-size: 1.4rem;
+}
+
+.post-time {
+	margin-left: 13px;
+	font-size: 1.2rem;
+	color: #666666;
+}
+
+.post-text {
+	margin-top: 10px;
+	font-size: 1.2rem;
+	text-align: justify;
+	line-height: 1.35;
+	overflow: hidden;
+}
+
+.post-edit-button {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.post-picture {
+	width: 75%;
+	margin-top: 15px;
+}
+
+.post-picture img {
+	border-radius: 5px;
+	max-width: 100%;
+}
+
+.post-buttons {
+	text-align: right;
+	margin-top: 10px;
+}
+
+.post-button {
+	margin-left: 10px;
+}
+
+.post-comments {
+	background-color: #f2f2f5;
+	padding: 1rem;
+}
+
+.message-no-content {
+	display: block;
+	margin-top: 10px;
+	margin-left: 8px;
+}

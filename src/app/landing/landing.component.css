@@ -1,0 +1,23 @@
+.main {
+	padding-top: 45px;
+	height: auto;
+}
+
+.ui.segment {
+	padding: 7%;
+}
+
+.log-in {
+	margin-top: 13%;
+}
+
+.third-party-login {
+	font-size: 1.25rem;
+	margin-top: 1.5rem;
+}
+
+@media only screen and (max-width: 767px) {
+	.ui.menu {
+		padding: 0;
+	}
+}

@@ -1,0 +1,109 @@
+<div class="ui container">
+	<div class="ui centered mobile reversed stackable grid">
+		<div class="ten wide column">
+			<app-articles class="ui grid"></app-articles>
+		</div>
+
+		<div class="three wide column right-column">
+			<div class="ui grid">
+				<div class="mobile only row">
+					<div class="column">
+						<div class="ui segment profile-header">
+							<div class="ui inverted dimmer" [ngClass]="{ 'active': isRetrievingUserBrief }">
+								<div class="ui text loader">Loading</div>
+							</div>
+
+							<div class="header-avatar">
+								<img src="{{userBrief.avatar}}" alt="avatar">
+							</div>
+
+							<span class="header-display-name">{{userBrief.username}}</span>
+
+							<span *ngIf="!headlineEditor.isEditing">
+								{{userBrief.headline}}
+								<button class="ui compact icon button headline-button" (click)="headlineEditor.isEditing = true">
+									<i class="edit icon"></i>
+								</button>
+							</span>
+
+							<div *ngIf="headlineEditor.isEditing" class="ui mini action input mobile-headline">
+								<input type="text" [(ngModel)]="headlineEditor.value">
+								<div class="ui icon buttons">
+									<button (click)="headlineEditor.isEditing = false" class="ui button">
+										<i class="remove icon"></i>
+									</button>
+									<button [ngClass]="{ 'disabled': headlineEditor.isHandling || headlineEditor.value === '', 'loading': headlineEditor.isHandling }" (click)="updateHeadline()" class="ui button">
+										<i class="checkmark icon"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div *ngIf="headlineError.isShowing" class="row message-row">
+					<div class="column">
+						<div  class="ui warning message">
+							<i (click)="headlineError.isShowing = false" class="close icon"></i>
+							<div class="header">
+								Error
+							</div>
+							<p>{{headlineError.message}}</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="computer tablet only row">
+					<div class="column">
+						<div class="ui card">
+							<div class="ui inverted dimmer" [ngClass]="{ 'active': isRetrievingUserBrief }">
+								<div class="ui text loader">Loading</div>
+							</div>
+
+							<div class="image">
+								<img src="{{userBrief.avatar}}">
+							</div>
+
+							<div class="content">
+								<a class="header header-username">{{userBrief.username}}</a>
+
+								<div class="description">
+									<div *ngIf="!headlineEditor.isEditing">
+										<span id="uh_text">{{userBrief.headline}}</span>
+										<button id="uh_s_btn" class="ui compact icon button headline-button" (click)="headlineEditor.isEditing = true">
+											<i class="edit icon"></i>
+										</button>
+									</div>
+
+									<div *ngIf="headlineEditor.isEditing">
+										<div class="ui fluid input">
+											<input id="uh_nh" type="text" [(ngModel)]="headlineEditor.value">
+										</div>
+										<div class="ui icon buttons headline-edit-button pull-right">
+											<button (click)="headlineEditor.isEditing = false" class="ui button">
+												<i class="remove icon"></i>
+											</button>
+											<button id="uh_btn" [ngClass]="{ 'disabled': headlineEditor.isHandling || headlineEditor.value === '', 'loading': headlineEditor.isHandling }" (click)="updateHeadline()" class="ui button">
+												<i class="checkmark icon"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="extra content">
+								<a>
+									<i class="user icon"></i>
+									{{userBrief.followingCount}} Following(s)
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row following-row">
+					<app-followings (onFollow)="onFollow($event)" (onUnfollow)="onUnfollow($event)" class="column"></app-followings>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

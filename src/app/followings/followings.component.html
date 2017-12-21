@@ -1,0 +1,50 @@
+<div class="ui segment centered grid">
+	<div class="ui inverted dimmer" [ngClass]="{ 'active': isRetrievingFollowings }">
+		<div class="ui text loader">Loading</div>
+	</div>
+
+	<div class="sixteen wide column">
+		<h4 class="ui header">Following(s)</h4>
+	</div>
+
+	<div class="sixteen wide column search-row">
+		<div class="ui icon input full-input">
+			<input id="following_search" [(ngModel)]="newFollowingEditor.value" type="text" placeholder="e.g. hc42">
+			<i id="af_btn" [ngClass]="{ 'disabled': newFollowingEditor.isHandling || !newFollowingEditor.value, 'loading': newFollowingEditor.isHandling }" class="inverted circular add user link icon" (click)="follow()"></i>
+		</div>
+	</div>
+
+	<div id="af_msg" *ngIf="followingError.isShowing" class="sixteen wide column">
+		<div  class="ui warning message">
+			<i (click)="followingError.isShowing = false" class="close icon"></i>
+			<div class="header">
+				Error
+			</div>
+			<p>{{followingError.message}}</p>
+		</div>
+	</div>
+
+	<div *ngIf="!followings.length" class="sixteen wide column message-outer">
+		<span class="message-no-content">no following yet...</span>
+	</div>
+
+	<div *ngFor="let following of followings" class="five wide mobile sixteen wide computer column">
+		<div  class="ui card following-card">
+			<div class="image">
+				<img src="{{following.avatar}}">
+			</div>
+			<div class="content">
+				<a class="header">{{following.username}}</a>
+				<div class="description">
+					{{following.headline}}
+				</div>
+			</div>
+			<div class="extra content">
+			<span (click)="unfollow(following)" class="right floated pointer-cursor">
+				<i class="remove icon"></i>
+				Unfollow
+			</span>
+			</div>
+		</div>
+	</div>
+</div>

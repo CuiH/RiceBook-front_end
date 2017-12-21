@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<testsuite name="Chrome 62.0.3202 (Windows 10 0.0.0)" package="" timestamp="2017-11-14T06:26:48" id="0" hostname="CH" tests="14" errors="0" failures="0" time="1.29">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36"/>
+  </properties>
+  <testcase name="App Component should navigate to main" time="0.163" classname="Chrome_62_0_3202_(Windows_10_0_0_0).App Component"/>
+  <testcase name="App Component should navigate to profile" time="0.055" classname="Chrome_62_0_3202_(Windows_10_0_0_0).App Component"/>
+  <testcase name="App Component should log out a user" time="0.033" classname="Chrome_62_0_3202_(Windows_10_0_0_0).App Component"/>
+  <testcase name="Articles Component should fetch articles" time="0.078" classname="Chrome_62_0_3202_(Windows_10_0_0_0).Articles Component"/>
+  <testcase name="Articles Component should render articles" time="0.064" classname="Chrome_62_0_3202_(Windows_10_0_0_0).Articles Component"/>
+  <testcase name="Articles Component should update the search keyword" time="0.076" classname="Chrome_62_0_3202_(Windows_10_0_0_0).Articles Component"/>
+  <testcase name="Articles Component should filter displayed articles by the search keyword" time="0.076" classname="Chrome_62_0_3202_(Windows_10_0_0_0).Articles Component"/>
+  <testcase name="Articles Component should dispatch actions to create a new article" time="0.06" classname="Chrome_62_0_3202_(Windows_10_0_0_0).Articles Component"/>
+  <testcase name="Followings Component should display error message to user" time="0.044" classname="Chrome_62_0_3202_(Windows_10_0_0_0).Followings Component"/>
+  <testcase name="Landing Component should log in a user" time="0.132" classname="Chrome_62_0_3202_(Windows_10_0_0_0).Landing Component"/>
+  <testcase name="Landing Component should not log in an invalid user" time="0.132" classname="Chrome_62_0_3202_(Windows_10_0_0_0).Landing Component"/>
+  <testcase name="Main Component should update headline" time="0.077" classname="Chrome_62_0_3202_(Windows_10_0_0_0).Main Component"/>
+  <testcase name="Profile Component should fetch the user's profile information" time="0.141" classname="Chrome_62_0_3202_(Windows_10_0_0_0).Profile Component"/>
+  <testcase name="Profile Component should display success message to user" time="0.159" classname="Chrome_62_0_3202_(Windows_10_0_0_0).Profile Component"/>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>

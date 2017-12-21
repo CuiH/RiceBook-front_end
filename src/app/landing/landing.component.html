@@ -1,0 +1,128 @@
+<div class="main">
+	<div class="ui container">
+		<div class="ui centered stackable grid">
+			<div *ngIf="!isLogin" class="eight wide column">
+				<div class="ui raised segment">
+					<h4 class="ui dividing header">Sign up</h4>
+
+					<div *ngIf="signUpError.isShowing" class="ui warning message">
+						<i (click)="signUpError.isShowing = false" class="close icon"></i>
+						<div class="header">
+							Error
+						</div>
+						<p>{{signUpError.message}}</p>
+					</div>
+
+					<form #f1="ngForm">
+						<div class="ui form" [ngClass]="{'error': f1.touched && f1.invalid}">
+							<div class="field">
+								<label><span class="asterisk">*</span>Username</label>
+								<input type="text" name="username" [(ngModel)]="newUser.username" placeholder="only lower or upper case letters and numbers, not start with a number" pattern="^[a-zA-Z]+[a-zA-Z0-9]*$" required #username="ngModel">
+							</div>
+							<div class="ui error message" *ngIf="username.touched && username.errors">
+								<p>Your username should consist of alphabetic characters and numbers, and not start with alphabetic characters.</p>
+							</div>
+
+							<div class="field">
+								<label>Display Name</label>
+								<input type="text" name="d_name" [(ngModel)]="newUser.displayName" placeholder="your nickname">
+							</div>
+
+							<div class="field">
+								<label><span class="asterisk">*</span>Email Address</label>
+								<input type="text" name="email" [(ngModel)]="newUser.email"  placeholder="a@b.com" pattern="^\w+(\.\w+)*@\w+(\.\w+)+$" required #email="ngModel">
+							</div>
+							<div class="ui error message" *ngIf="email.touched && email.errors">
+								<p>Please input a valid email.</p>
+							</div>
+
+							<div class="field">
+								<label><span class="asterisk">*</span>Phone Number</label>
+								<input type="text" name="phone" [(ngModel)]="newUser.phone" placeholder="XXX-XXX-XXXX" pattern="^\d{3}-\d{3}-\d{4}$" required #phone="ngModel">
+							</div>
+							<div class="ui error message" *ngIf="phone.touched && phone.errors">
+								<p>Please input a valid phone number (xxx-xxx-xxxx).</p>
+							</div>
+
+							<div class="field">
+								<label><span class="asterisk">*</span>Date of Birth</label>
+								<input type="date" name="dob" [(ngModel)]="newUser.dob" validAge required #dob="ngModel">
+							</div>
+							<div class="ui error message" *ngIf="dob.touched && dob.errors">
+								<p>Your age should be above 18.</p>
+							</div>
+
+							<div class="field">
+								<label><span class="asterisk">*</span>Zip Code</label>
+								<input type="text" name="zipcode" [(ngModel)]="newUser.zipcode" placeholder="XXXXX" pattern="^\d{5}$" required #zipcode="ngModel">
+							</div>
+							<div class="ui error message" *ngIf="zipcode.touched && zipcode.errors">
+								<p>Please input a valid zipcode (xxxxx).</p>
+							</div>
+
+							<div class="field">
+								<label><span class="asterisk">*</span>Password</label>
+								<input type="password" name="pwd" [(ngModel)]="newUser.password" placeholder="please input a password" required #pwd="ngModel">
+							</div>
+							<div class="ui error message" *ngIf="pwd.touched && pwd.errors">
+								<p>Please input a password</p>
+							</div>
+
+							<div class="field">
+								<label><span class="asterisk">*</span>Password Confirmation</label>
+								<input type="password" name="pwd_cfm" [(ngModel)]="passwordConfirmation" placeholder="please input your password again" validPassword required #pwd_cfm="ngModel">
+							</div>
+							<div class="ui error message" *ngIf="pwd_cfm.touched && pwd_cfm.invalid">
+								<p>The two passwords are different</p>
+							</div>
+
+							<div id="su_btn" class="ui submit teal button" [ngClass]="{'disabled': f1.invalid || signUpEditor.isHandling, 'loading': signUpEditor.isHandling }" (click)="signUp()">Sign up</div>
+							<a class="pointer-cursor" (click)="f1.reset()">Clear</a>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div *ngIf="isLogin" class="six wide column log-in">
+				<div class="ui raised segment">
+					<h4 class="ui dividing header">Log in</h4>
+
+					<div id="li_msg" *ngIf="logInError.isShowing" class="ui warning message">
+						<i (click)="logInError.isShowing = false" class="close icon"></i>
+						<div class="header">
+							Error
+						</div>
+						<p>{{logInError.message}}</p>
+					</div>
+
+					<form #f2="ngForm">
+						<div class="ui form" [ngClass]="{'error': f2.touched && f2.invalid}">
+							<div class="field">
+								<label><span class="asterisk">*</span>Username</label>
+								<input id="li_username" type="text" name="username" placeholder="e.g. default" [(ngModel)]="logInInfo.username" required #username="ngModel">
+							</div>
+							<div class="ui error message" *ngIf="username.touched && username.errors">
+								<p>Please input your username</p>
+							</div>
+
+							<div class="field">
+								<label><span class="asterisk">*</span>Password</label>
+								<input id="li_pwd" type="password" name="pwd" placeholder="e.g. the-default-user" [(ngModel)]="logInInfo.password" required #pwd="ngModel">
+							</div>
+							<div class="ui error message" *ngIf="pwd.touched && pwd.errors">
+								<p>Please input your password</p>
+							</div>
+
+							<button id="li_smt" class="ui submit green button" [ngClass]="{'disabled': f2.invalid || logInEditor.isHandling, 'loading': logInEditor.isHandling }" (click)="logIn()">Log in</button>
+						</div>
+					</form>
+
+					<div class="third-party-login">
+						Or, login with:
+						<a href="{{authUrl}}"><i class="icon twitter"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

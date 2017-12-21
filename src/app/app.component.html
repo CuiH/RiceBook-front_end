@@ -1,0 +1,32 @@
+<div class="ui sticky fixed top menu">
+	<div class="header item">RiceBook</div>
+	<a routerLink="/main" class="item">Home</a>
+
+	<div *ngIf="!loggedIn" class="right menu">
+		<div class="item">
+			<div id="su_s_btn" class="ui primary button" routerLink="/landing" [queryParams]="{type: 'sign_up'}">Sign up</div>
+		</div>
+		<div class="item">
+			<div id="li_s_btn" class="ui button" routerLink="/landing" [queryParams]="{type: 'log_in'}">Log-in</div>
+		</div>
+	</div>
+
+	<div *ngIf="loggedIn" class="right menu">
+		<div *ngIf="loggedIn" class="ui dropdown item" suiDropdown>
+			{{username}} <i class="dropdown icon"></i>
+			<div class="menu" suiDropdownMenu>
+				<a routerLink="/profile" class="item">Profile</a>
+				<div class="divider"></div>
+				<a id="lo_btn" class="item" (click)="logOut()">Logout</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="main">
+	<router-outlet></router-outlet>
+</div>
+
+<div class="footer">
+	<div class="footer-info">© 2017 CuiH. RICE U COMP-531.</div>
+</div>

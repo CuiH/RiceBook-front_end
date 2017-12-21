@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<testsuite tests="11" name="E2E Test Results" time="27.261999999999997" timestamp="2017-11-17T01:36:23">
+    <testcase className="Landing Page should register a new user" name="Landing Page should register a new user" time="4.859"/>
+    <testcase className="Landing Page should login a user" name="Landing Page should login a user" time="2.077"/>
+    <testcase className="Main Page should create new article" name="Main Page should create new article" time="2.477"/>
+    <testcase className="Main Page should update article" name="Main Page should update article" time="2.686"/>
+    <testcase className="Main Page should update headline" name="Main Page should update headline" time="2.72"/>
+    <testcase className="Main Page should follow a user" name="Main Page should follow a user" time="2.501"/>
+    <testcase className="Main Page should unfollow a user" name="Main Page should unfollow a user" time="2.284"/>
+    <testcase className="Main Page should filter articles" name="Main Page should filter articles" time="2.044"/>
+    <testcase className="Profile Page should update email" name="Profile Page should update email" time="2.313"/>
+    <testcase className="Profile Page should update zipcode" name="Profile Page should update zipcode" time="1.889"/>
+    <testcase className="Profile Page should not be able to update password" name="Profile Page should not be able to update password" time="1.412"/>
+    <system-out>beta</system-out>
+</testsuite>

@@ -1,0 +1,99 @@
+.ui.container {
+	padding-top: 30px;
+}
+
+.profile-header {
+	background-image: url("http://cuih.xyz/assets/images/temp/profile.jpg");
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	text-align: center;
+}
+
+.header-avatar {
+	display: block;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.third-party-row {
+	line-height: 1.85rem;
+	margin-bottom: 1rem;
+}
+
+.header-avatar img {
+	display: block;
+	margin: 0 auto;
+	width: 130px;
+	height: 130px;
+	border-radius: 5px;
+}
+
+.new-avatar-upload-input {
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	color: #04107F;
+}
+
+.new-avatar-upload-input input {
+	position: absolute;
+	top: 0;
+	right: 0;
+	opacity: 0;
+}
+
+.new-avatar-upload-button {
+	color: #670096;
+}
+
+.new-avatar-upload-progress {
+	margin: 0 auto 35px;
+	width: 50%;
+}
+
+.new-avatar-upload-button i {
+	margin-left: 5px;
+}
+
+.profile-header span {
+	display: block;
+	text-align: center;
+}
+
+.header-headline {
+	font-size: 1.2rem;
+	color: #43484C;
+	margin-top: 10px;
+}
+
+.profile-segment {
+	margin-top: 0;
+}
+
+.profile-content {
+	margin-top: 25px;
+	margin-bottom: 5px;
+}
+
+.profile-titles .row {
+	margin-bottom: 28px;
+	text-align: right;
+	font-weight: bold;
+	font-size: 1.35rem;
+	min-height: 1.5rem;
+}
+
+.profile-values .row {
+	margin-bottom: 28px;
+	font-size: 1.35rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	min-height: 1.5rem;
+}
+
+.button-edit {
+	position: absolute;
+	top: 1.5rem;
+	right: 2rem;
+	z-index: 10;
+}

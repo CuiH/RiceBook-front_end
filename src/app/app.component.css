@@ -1,0 +1,31 @@
+.ui.menu {
+	padding: 0 17%;
+	height: 48px;
+}
+
+.main {
+	background-image: url("http://res.cloudinary.com/hcui95/image/upload/v1510894949/background_ckbsjs.png");
+	padding-top: 48px;
+	padding-bottom: 60px;
+	min-height: 100%;
+}
+
+.footer {
+	height: 60px;
+	margin-top: -60px;
+}
+
+.footer-info {
+	padding-top: 25px;
+	font-size: .75rem;
+	color: #343a40;
+	text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+	.ui.menu {
+		padding: 0;
+	}
+}
+
+

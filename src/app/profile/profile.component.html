@@ -1,0 +1,266 @@
+<div class="ui container">
+	<div class="ui centered stackable grid">
+		<div class="row">
+			<div class="eleven wide column">
+				<div class="ui segment profile-header">
+					<div class="header-avatar">
+						<img src="{{userProfile.avatar}}" alt="avatar">
+					</div>
+
+					<div *ngIf="!avatarEditor.isHandling && !avatarEditor.isEditing" class="new-avatar-upload-input">
+						<span><i class="icon image"></i>Upload New</span>
+						<input ng2FileSelect class="pointer-cursor" type="file" accept="image/*" [uploader]="uploader" (change)="showAvatarInfo()">
+					</div>
+
+					<div *ngIf="avatarEditor.isEditing" class="new-avatar-upload-button">
+						<span>
+							{{avatarEditor.value}}
+							<i (click)="clearAvatar()" class="pointer-cursor icon cancel"></i>
+							<i (click)="updateAvatar()" class="pointer-cursor icon upload"></i>
+						</span>
+					</div>
+
+					<div *ngIf="avatarEditor.isHandling" class="new-avatar-upload-progress">
+						<sui-progress class="indicating" [value]="uploadProgress">Uploading</sui-progress>
+					</div>
+
+					<span class="header-headline">{{userProfile.headline}}</span>
+				</div>
+			</div>
+		</div>
+
+		<div *ngIf="profileError.isShowing" class="row message-row">
+			<div class="eleven wide column">
+				<div class="ui warning message">
+					<i (click)="profileError.isShowing = false" class="close icon"></i>
+					<div class="header">
+						Error
+					</div>
+					<p>{{profileError.message}}</p>
+				</div>
+			</div>
+		</div>
+
+		<div *ngIf="profileSuccess.isShowing" class="row message-row">
+			<div class="eleven wide column">
+				<div class="ui success message">
+					<i (click)="profileSuccess.isShowing = false" class="close icon"></i>
+					<div class="header">
+						Success
+					</div>
+					<p>{{profileSuccess.message}}</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div *ngIf="!profileEditor.isEditing && !passwordEditor.isEditing && !thirdPartyEditor.isEditing" class="eleven wide column">
+				<a id="up_s_btn" (click)="profileEditor.isEditing = true" class="pointer-cursor button-edit">
+					<i class="announcement icon"></i>Edit
+				</a>
+
+				<div class="ui segment profile-segment">
+					<h3 class="ui header">Profile</h3>
+
+					<div class="ui inverted dimmer" [ngClass]="{ 'active': isRetrievingUserProfile }">
+						<div class="ui text loader">Loading</div>
+					</div>
+
+					<div class="ui centered grid profile-content">
+						<div class="doubling four column row">
+							<div class="seven wide column profile-titles">
+								<div class="row">Username:</div>
+								<div class="row">Display Name:</div>
+								<div class="row">Email Address:</div>
+								<div class="row">Phone Number:</div>
+								<div class="row">Date of Birth:</div>
+								<div class="row">Zip Code:</div>
+								<div class="row">Password:</div>
+								<div class="row third-party-row">Third-party Auth:</div>
+							</div>
+
+							<div class="seven wide column profile-values">
+								<div class="row">{{userProfile.username}}</div>
+								<div class="row">{{userProfile.displayName}}</div>
+								<div class="row">{{userProfile.email}}</div>
+								<div class="row">{{userProfile.phone}}</div>
+								<div class="row">{{userProfile.dob}}</div>
+								<div class="row">{{userProfile.zipcode}}</div>
+								<div class="row">
+									<a (click)="passwordEditor.isEditing = true" class="pointer-cursor">
+										<i class="setting icon"></i>Change
+									</a>
+								</div>
+
+								<div *ngIf="userProfile.username.indexOf('@') !== -1" class="row third-party-row">
+									<button (click)="thirdPartyEditor.isEditing = true" class="ui twitter mini button">
+										<i class="twitter icon"></i>
+										Link
+									</button>
+								</div>
+								<div *ngIf="userProfile.username.indexOf('@') === -1 && userProfile.auth.length === 0" class="row third-party-row">
+									<a href="{{authUrl}}" class="ui twitter mini button">
+										<i class="twitter icon"></i>
+										Link
+									</a>
+								</div>
+								<div *ngIf="userProfile.username.indexOf('@') === -1 && userProfile.auth.length !== 0" class="row third-party-row">
+									<span>{{userProfile.auth[0].username}}</span>
+									<button (click)="unlinkTwitter()" [ngClass]="{ 'disabled': thirdPartyEditor.isHandling , 'loading': thirdPartyEditor.isHandling }" class="ui twitter mini button">
+										<i class="twitter icon"></i>
+										Unlink
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div *ngIf="profileEditor.isEditing" class="eleven wide column">
+				<div class="ui segment profile-segment">
+					<h3 class="ui header">Profile - Edit</h3>
+
+					<div  class="ui centered grid profile-content">
+						<div class="eight wide computer thirteen wide mobile column">
+							<form #f1="ngForm">
+								<div class="ui form" [ngClass]="{'error': f1.touched && f1.invalid}">
+									<div class="disabled field">
+										<label><span class="asterisk">*</span>Username</label>
+										<input type="text" name="a_name" [ngModel]="userProfile.username">
+									</div>
+
+									<div class="field">
+										<label>Display Name</label>
+										<input type="text" name="displayName" [(ngModel)]="profileInfo.displayName" placeholder="your nickname">
+									</div>
+
+									<div class="field">
+										<label><span class="asterisk">*</span>Email Address</label>
+										<input type="text" name="email" [(ngModel)]="profileInfo.email" placeholder="a@b.com" pattern="^\w+(\.\w+)*@\w+(\.\w+)+$" required #email="ngModel">
+									</div>
+									<div class="ui error message" *ngIf="email.touched && email.errors">
+										<p>Please input a valid email.</p>
+									</div>
+
+									<div class="field">
+										<label><span class="asterisk">*</span>Phone Number</label>
+										<input type="text" name="phone" [(ngModel)]="profileInfo.phone" placeholder="XXX-XXX-XXXX" pattern="^\d{3}-\d{3}-\d{4}$" required #phone="ngModel">
+									</div>
+									<div class="ui error message" *ngIf="phone.touched && phone.errors">
+										<p>Please input a valid phone number (xxx-xxx-xxxx).</p>
+									</div>
+
+									<div class="disabled field">
+										<label><span class="asterisk">*</span>Date of Birth</label>
+										<input type="date" name="dob" [ngModel]="userProfile.dob">
+									</div>
+
+									<div class="field">
+										<label><span class="asterisk">*</span>Zip Code</label>
+										<input type="text" name="zipcode" [(ngModel)]="profileInfo.zipcode" placeholder="XXXXX" pattern="^\d{5}$" required #zipcode="ngModel">
+									</div>
+									<div class="ui error message" *ngIf="zipcode.touched && zipcode.errors">
+										<p>Please input a valid zipcode (xxxxx).</p>
+									</div>
+
+									<div id="up_btn" class="ui submit teal button" [ngClass]="{ 'disabled': f1.invalid || profileEditor.isHandling , 'loading': profileEditor.isHandling }" (click)="updateProfile()">Update</div>
+									<a id="up_cancel" class="pointer-cursor" (click)="profileEditor.isEditing = false">Back</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div *ngIf="passwordEditor.isEditing" class="eleven wide column">
+				<div class="ui segment profile-segment">
+					<h3 class="ui header">Profile - Change Password</h3>
+
+					<div class="ui centered grid profile-content">
+						<div class="eight wide computer thirteen wide mobile column">
+							<div *ngIf="passwordError.isShowing" class="ui warning message">
+								<div class="header">
+									Error
+								</div>
+								<p id="pe_msg">{{passwordError.message}}</p>
+							</div>
+
+							<form #f2="ngForm">
+								<div class="ui form" [ngClass]="{'error': f2.touched && f2.invalid}">
+									<div class="disabled field">
+										<label><span class="asterisk">*</span>Old Password</label>
+										<input type="password" name="old_pwd" [(ngModel)]="passwordInfo.oldPassword" required #old_pass="ngModel">
+									</div>
+									<div class="ui error message" *ngIf="old_pass.touched && old_pass.errors">
+										<p>Please input your old password.</p>
+									</div>
+
+									<div class="disabled field">
+										<label><span class="asterisk">*</span>New Password</label>
+										<input type="password" name="pwd" [(ngModel)]="passwordInfo.newPassword" required #new_pass="ngModel">
+									</div>
+									<div class="ui error message" *ngIf="new_pass.touched && new_pass.errors">
+										<p>Please input your new password.</p>
+									</div>
+
+									<div class="disabled field">
+										<label><span class="asterisk">*</span>New Password Confirmation</label>
+										<input type="password" name="pwd_cfm" [(ngModel)]="passwordInfo.newPasswordConfirmation" validPassword required #pwd_cfm="ngModel">
+									</div>
+									<div class="ui error message" *ngIf="pwd_cfm.touched && pwd_cfm.errors">
+										<p>The two passwords are different.</p>
+									</div>
+
+									<div class="ui submit teal button disabled">Update</div>
+									<a class="pointer-cursor" (click)="passwordEditor.isEditing = false">Back</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div *ngIf="thirdPartyEditor.isEditing" class="eleven wide column">
+				<div class="ui segment profile-segment">
+					<h3 class="ui header">Profile - Link Account</h3>
+
+					<div class="ui centered grid profile-content">
+						<div class="eight wide computer thirteen wide mobile column">
+							<div *ngIf="thirdPartyError.isShowing" class="ui warning message">
+								<i (click)="thirdPartyError.isShowing = false" class="close icon"></i>
+								<div class="header">
+									Error
+								</div>
+								<p>{{thirdPartyError.message}}</p>
+							</div>
+
+							<form #f3="ngForm">
+								<div class="ui form" [ngClass]="{'error': f3.touched && f3.invalid}">
+									<div class="field">
+										<label><span class="asterisk">*</span>Username</label>
+										<input type="text" name="username" [(ngModel)]="logInInfo.username" required #username="ngModel">
+									</div>
+									<div class="ui error message" *ngIf="username.touched && username.errors">
+										<p>Please input your username.</p>
+									</div>
+
+									<div class="field">
+										<label><span class="asterisk">*</span>Password</label>
+										<input type="password" name="pwd_cfm" [(ngModel)]="logInInfo.password" required #pwd="ngModel">
+									</div>
+									<div class="ui error message" *ngIf="pwd.touched && pwd.errors">
+										<p>Please input your password.</p>
+									</div>
+
+									<div (click)="linkTwitterToLocal()" class="ui submit teal button disabled" [ngClass]="{ 'disabled': f3.invalid || thirdPartyEditor.isHandling , 'loading': thirdPartyEditor.isHandling }">Link</div>
+									<a class="pointer-cursor" (click)="thirdPartyEditor.isEditing = false">Back</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

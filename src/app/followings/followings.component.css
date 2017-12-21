@@ -1,0 +1,21 @@
+.following-card {
+	width: 94%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.message-outer {
+	padding-top: 0!important;
+}
+
+.message-no-content {
+	display: block;
+	margin: 10px;
+}
+
+
+@media only screen and (max-width: 767px) {
+	.following-card {
+		width: 100%;
+	}
+}

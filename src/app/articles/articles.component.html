@@ -1,0 +1,41 @@
+<div *ngIf="articlesError.isShowing" class="row message-row">
+	<div class="column">
+		<div  class="ui warning message">
+			<i (click)="articlesError.isShowing = false" class="close icon"></i>
+			<div class="header">
+				Error
+			</div>
+			<p>{{articlesError.message}}</p>
+		</div>
+	</div>
+</div>
+
+<app-article-uploader class="row" (onPost)="onPost($event)"></app-article-uploader>
+
+<div class="row">
+	<div class="column">
+		<div class="ui search">
+			<div class="ui icon input">
+				<input id="article_search" (input)="filter()" [(ngModel)]="articlesFilterEditor.value"  class="prompt" type="text" placeholder="filter by keyword...">
+				<i class="search icon"></i>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row posts-row">
+	<div *ngIf="isRetrievingArticles" class="dimmer-outer">
+		<div class="ui active centered inline loader">
+			<div class="ui text loader">Loading</div>
+		</div>
+	</div>
+
+
+	<div class="sixteen wide column">
+		<div *ngIf="activeArticles.length === 0" class="ui segment no-post-row">
+			no article found...
+		</div>
+	</div>
+
+	<app-article-detail class="sixteen wide column post-row" *ngFor="let article of activeArticles" [article]="article"></app-article-detail>
+</div>

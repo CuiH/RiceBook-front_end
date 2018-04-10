@@ -5,8 +5,6 @@ import { HttpModule } from '@angular/http';
 
 import { SuiModule } from "ng2-semantic-ui";
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-import { CloudinaryModule } from '@cloudinary/angular-4.x';
-import * as Cloudinary from 'cloudinary-core';
 import { FileSelectDirective } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
@@ -50,8 +48,7 @@ import { ArticleUploaderComponent } from './article-uploader/article-uploader.co
 		SuiModule,
 		ReactiveFormsModule,
 		FormsModule,
-		HttpModule,
-		CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'hcui95'}),
+		HttpModule
 	],
 	providers: [
 		{ provide: LOCALE_ID, useValue: "en-US" },
